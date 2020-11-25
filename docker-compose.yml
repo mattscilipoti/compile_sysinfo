@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  compile:
+    build: .
+    # Image WORKDIR contains main.go
+    command: ["make", "sysinfo"]
+    env_file: .env
+    volumes:
+      # output is created in shared volume
+      # These vars are defined in .env file. They are not available for use in this definition if defined in `environment:`
+      - ${HOST_OUTPUT_DIR}:${GO_OUTPUT_DIR}
